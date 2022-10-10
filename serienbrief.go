@@ -54,6 +54,9 @@ func main() {
 	}
 
 	content, err := os.ReadFile(*brief)
+	if err != nil {
+		log.Fatalf("could not read template letter %w", err)
+	}
 	t := template.Must(template.New("Brief").Parse(string(content)))
 	for _, a := range addr {
 		out, err := os.Create(fmt.Sprintf("%s.txt", a.Fach))
